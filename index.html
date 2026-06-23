@@ -564,13 +564,23 @@
       btn.textContent = 'Wird gesendet …';
 
       try {
-        const res = await fetch('/api/lead', {
+        // Web3Forms: empfängt das Formular ohne eigenen Server und schickt
+        // jede Anmeldung per E-Mail. Der access_key ist öffentlich (nur zum
+        // Empfangen gedacht), darf also im Quelltext stehen.
+        const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ vorname, email })
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: '2163ec91-804e-492e-a7e6-25f7485b1355',
+            subject: 'Neue Probelektion-Anmeldung – Wortgewandt',
+            from_name: 'Wortgewandt Landingpage',
+            name: vorname,
+            email: email
+          })
         });
 
-        if (!res.ok) throw new Error('Serverfehler');
+        const data = await res.json();
+        if (!data.success) throw new Error(data.message || 'Serverfehler');
 
         showMsg('Geschafft, ' + vorname + '! Schau in dein Postfach — die erste Lektion ist unterwegs. 🎉', 'ok');
         form.reset();
