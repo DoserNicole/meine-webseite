@@ -1,0 +1,7 @@
+# Niemals Secrets hochladen
+Github Key.rtf
+*.token
+.env
+
+# macOS
+.DS_Store
