@@ -1,5 +1,7 @@
 # Niemals Secrets hochladen
+*.rtf
 Github Key.rtf
+Meine Website Push.rtf
 *.token
 .env
 
