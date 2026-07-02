@@ -108,6 +108,26 @@
   .info-box{text-align:center;background:rgba(198,255,0,.08);border:1px solid var(--acid);border-radius:18px;padding:2rem;margin-top:2rem}
   .info-box b{color:var(--acid)}
 
+  /* ===== FORMULAR ===== */
+  .rsvp-form{max-width:520px;margin:0 auto;text-align:left}
+  .rsvp-form .field{margin-bottom:1.3rem}
+  .rsvp-form label{display:block;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:.5rem}
+  .rsvp-form input,.rsvp-form select,.rsvp-form textarea{
+    width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.2);
+    border-radius:12px;padding:.9rem 1rem;color:var(--white);font-family:inherit;font-size:1rem;
+    transition:border-color .2s,box-shadow .2s;
+  }
+  .rsvp-form input:focus,.rsvp-form select:focus,.rsvp-form textarea:focus{
+    outline:none;border-color:var(--pink);box-shadow:0 0 0 3px rgba(255,45,149,.25);
+  }
+  .rsvp-form select option{background:#12101c;color:var(--white)}
+  .rsvp-form textarea{resize:vertical;min-height:80px}
+  .rsvp-form .cta{border:none;cursor:pointer;width:100%;margin-top:.5rem;font-family:"Anton",sans-serif}
+  .form-note{font-size:.8rem;opacity:.7;margin-top:1.2rem;text-align:center}
+  #form-success{display:none;text-align:center;padding:1rem 0}
+  #form-success .big{font-family:"Anton",sans-serif;font-size:2rem;color:var(--acid);margin-bottom:.5rem}
+  .hp{position:absolute;left:-9999px;opacity:0}
+
   footer{text-align:center;padding:3rem 1.4rem;font-size:.8rem;opacity:.6;letter-spacing:.1em}
   footer .suits-sm{font-size:1.2rem;margin-bottom:1rem;letter-spacing:.5rem}
   a.mail{color:var(--cyan)}
@@ -172,16 +192,61 @@
 <section id="anmeldung">
   <h2 class="sec-title">Bist du <span class="hl">dabei?</span></h2>
   <div class="info-box">
-    <p style="font-size:1.1rem;margin-bottom:1.5rem">Sag mir bitte bis <b>8. Juli</b> Bescheid, damit ich genug einkaufen kann.<br>Ein Klick – dein Mailprogramm öffnet die fertige Zusage:</p>
-    <a class="cta" href="mailto:nicole.doser@medumio.de?subject=Zusage%20Spieleabend%2010.%20Juli%20%F0%9F%8E%B2&body=Hey!%20Ich%20bin%20beim%20Spieleabend%20am%2010.%20Juli%20dabei.%20%F0%9F%83%8F%0A%0AName%3A%20%0AIch%20komme%20mit%20___%20Personen%3A%20%0AIch%20bringe%20mit%20(Spiel%2FSnack%2FDrink)%3A%20%0A%0ABis%20dann!">📨 Zusage senden</a>
-    <p style="margin-top:1.5rem;font-size:.85rem;opacity:.75">Lieber absagen? Auch das per Klick – einfach die Mail anpassen. 💜</p>
+    <p style="font-size:1.1rem;margin-bottom:1.8rem">Sag mir bitte bis <b>8. Juli</b> Bescheid, damit ich genug einkaufen kann. 💜</p>
+
+    <form id="rsvp" class="rsvp-form" action="https://api.web3forms.com/submit" method="POST">
+      <!-- Anonymer Access Key – KEINE E-Mail sichtbar. Vor dem Live-Gang eintragen: -->
+      <input type="hidden" name="access_key" value="2163ec91-804e-492e-a7e6-25f7485b1355">
+      <input type="hidden" name="subject" value="🎲 Neue Zusage – Spieleabend Berlin Rave Edition">
+      <input type="hidden" name="from_name" value="Spieleabend-Anmeldung">
+
+      <div class="field">
+        <label for="name">Dein Name *</label>
+        <input type="text" id="name" name="name" required placeholder="Wie heißt du?">
+      </div>
+
+      <div class="field">
+        <label for="antwort">Kommst du? *</label>
+        <select id="antwort" name="Antwort" required>
+          <option value="🎉 Ja, ich bin dabei!">🎉 Ja, ich bin dabei!</option>
+          <option value="😢 Leider nein">😢 Leider nein</option>
+          <option value="🤔 Vielleicht">🤔 Vielleicht</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="personen">Anzahl Personen</label>
+        <input type="number" id="personen" name="Anzahl Personen" min="1" value="1">
+      </div>
+
+      <div class="field">
+        <label for="mitbringen">Ich bringe mit (Spiel / Snack / Drink)</label>
+        <input type="text" id="mitbringen" name="Bringt mit" placeholder="z. B. Uno + Chips">
+      </div>
+
+      <div class="field">
+        <label for="nachricht">Nachricht an den Host</label>
+        <textarea id="nachricht" name="Nachricht" placeholder="Optional…"></textarea>
+      </div>
+
+      <!-- Spam-Schutz (unsichtbar) -->
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+      <button type="submit" class="cta">📨 Zusage absenden</button>
+      <p class="form-note">Deine Angaben gehen direkt &amp; privat an den Host. 🔒</p>
+    </form>
+
+    <div id="form-success">
+      <div class="big">🎉 Yesss, du bist notiert!</div>
+      <p>Danke für deine Rückmeldung – wir sehen uns auf der Tanz&shy;fläche… äh, am Spieltisch! 🃏</p>
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="suits-sm"><span style="color:var(--pink)">♠</span> <span style="color:var(--cyan)">♥</span> <span style="color:var(--acid)">♦</span> <span style="color:var(--uv)">♣</span></div>
   Spieleabend · Berlin Rave Edition · 10.07.2026<br>
-  Fragen? Schreib mir: <a class="mail" href="mailto:nicole.doser@medumio.de">nicole.doser@medumio.de</a>
+  Fragen? Nutz einfach das Formular oben. 💌
 </footer>
 
 <script>
@@ -195,6 +260,33 @@
     el.d.textContent=dd; el.h.textContent=String(hh).padStart(2,'0'); el.m.textContent=String(mm).padStart(2,'0'); el.s.textContent=String(ss).padStart(2,'0');
   }
   tick(); setInterval(tick,1000);
+
+  // Formular per Web3Forms absenden (ohne Seitenwechsel)
+  const form = document.getElementById('rsvp');
+  const success = document.getElementById('form-success');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    const orig = btn.textContent;
+    btn.textContent = 'Wird gesendet…'; btn.disabled = true;
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method:'POST',
+        headers:{'Accept':'application/json'},
+        body:new FormData(form)
+      });
+      const data = await res.json();
+      if (data.success) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      } else {
+        throw new Error(data.message || 'Fehler');
+      }
+    } catch (err) {
+      btn.textContent = orig; btn.disabled = false;
+      alert('Ups, das hat nicht geklappt 😕 Bitte versuch es nochmal.');
+    }
+  });
 </script>
 </body>
 </html>
