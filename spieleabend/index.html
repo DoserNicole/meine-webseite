@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPIELEABEND // BERLIN RAVE EDITION</title>
+<meta name="description" content="Wilde Start-Up-Super-Rave-Party mit Kartenspielen. Freitag, 10. Juli 2026, ab 19:00 Uhr. Melde dich an!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Anton&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#08060f;
+    --pink:#ff2d95;
+    --cyan:#00f0ff;
+    --acid:#c6ff00;
+    --uv:#9d4dff;
+    --white:#f6f2ff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:"Space Grotesk",system-ui,sans-serif;
+    overflow-x:hidden;
+    line-height:1.5;
+  }
+  /* film-grain overlay */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .display{font-family:"Anton",Impact,sans-serif;text-transform:uppercase;letter-spacing:.02em;line-height:.92}
+
+  /* ===== TICKER ===== */
+  .ticker{
+    background:var(--acid);color:#000;font-weight:700;text-transform:uppercase;
+    letter-spacing:.15em;font-size:.8rem;padding:.6rem 0;white-space:nowrap;overflow:hidden;
+    border-bottom:2px solid #000;
+  }
+  .ticker span{display:inline-block;padding-left:100%;animation:scroll 22s linear infinite}
+  @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;min-height:100vh;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;text-align:center;padding:2rem 1.2rem;
+    background:linear-gradient(rgba(8,6,15,.55),rgba(8,6,15,.85)),url("images/hero.png") center/cover no-repeat;
+  }
+  .kicker{
+    font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;color:var(--cyan);
+    border:1px solid var(--cyan);padding:.5rem 1.1rem;border-radius:100px;margin-bottom:1.5rem;
+    animation:flicker 4s infinite;
+  }
+  @keyframes flicker{0%,19%,21%,50%,52%,100%{opacity:1}20%,51%{opacity:.35}}
+  .hero h1{
+    font-size:clamp(3rem,13vw,9rem);
+    background:linear-gradient(90deg,var(--pink),var(--cyan),var(--acid));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 26px rgba(255,45,149,.45));
+  }
+  .hero h1 .sub{display:block;font-size:clamp(1rem,4vw,2rem);color:var(--white);-webkit-text-fill-color:var(--white);margin-top:.4rem;letter-spacing:.35em}
+  .suits{font-size:clamp(1.5rem,6vw,3rem);margin:1.4rem 0;letter-spacing:.4rem}
+  .suits .s1{color:var(--pink)}.suits .s2{color:var(--cyan)}.suits .s3{color:var(--acid)}.suits .s4{color:var(--uv)}
+  .meta-line{font-size:clamp(1rem,3vw,1.4rem);font-weight:700;letter-spacing:.05em;margin-bottom:2rem}
+  .meta-line b{color:var(--acid)}
+
+  /* ===== BUTTON ===== */
+  .cta{
+    display:inline-block;font-family:"Anton",sans-serif;text-transform:uppercase;
+    font-size:clamp(1.2rem,4vw,1.8rem);letter-spacing:.05em;
+    background:var(--pink);color:#fff;text-decoration:none;
+    padding:1.1rem 2.6rem;border-radius:100px;border:2px solid #fff;
+    box-shadow:0 0 0 rgba(255,45,149,.7);animation:pulse 2s infinite;transition:transform .15s;
+  }
+  .cta:hover{transform:scale(1.06) rotate(-1deg)}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,45,149,.6)}70%{box-shadow:0 0 0 26px rgba(255,45,149,0)}100%{box-shadow:0 0 0 0 rgba(255,45,149,0)}}
+  .scroll-hint{margin-top:2.5rem;font-size:.75rem;letter-spacing:.3em;color:var(--white);opacity:.6;text-transform:uppercase}
+
+  /* ===== COUNTDOWN ===== */
+  .countdown{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:1rem 0 2rem}
+  .cd-box{background:rgba(255,255,255,.05);border:1px solid var(--uv);border-radius:14px;padding:1rem 1.2rem;min-width:78px}
+  .cd-box .num{font-family:"Anton",sans-serif;font-size:2.2rem;color:var(--cyan);line-height:1}
+  .cd-box .lbl{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;opacity:.7;margin-top:.3rem}
+
+  /* ===== SECTIONS ===== */
+  section{padding:5rem 1.4rem;max-width:960px;margin:0 auto}
+  .sec-title{font-family:"Anton",sans-serif;text-transform:uppercase;font-size:clamp(2rem,7vw,3.5rem);margin-bottom:2.5rem;text-align:center}
+  .sec-title .hl{color:var(--acid)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem}
+  .card{
+    background:linear-gradient(160deg,rgba(157,77,255,.12),rgba(0,240,255,.06));
+    border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:1.8rem;
+    transition:border-color .2s,transform .2s;
+  }
+  .card:hover{border-color:var(--pink);transform:translateY(-4px)}
+  .card .emoji{font-size:2rem;display:block;margin-bottom:.6rem}
+  .card h3{font-size:1.15rem;margin-bottom:.4rem;color:var(--cyan)}
+  .card p{font-size:.95rem;opacity:.85}
+
+  /* lineup / program */
+  .lineup{list-style:none;max-width:600px;margin:0 auto}
+  .lineup li{display:flex;gap:1.2rem;align-items:baseline;padding:1rem 0;border-bottom:1px dashed rgba(255,255,255,.15)}
+  .lineup .time{font-family:"Anton",sans-serif;color:var(--pink);font-size:1.4rem;min-width:80px}
+  .lineup .act{font-size:1.05rem}
+
+  .info-box{text-align:center;background:rgba(198,255,0,.08);border:1px solid var(--acid);border-radius:18px;padding:2rem;margin-top:2rem}
+  .info-box b{color:var(--acid)}
+
+  footer{text-align:center;padding:3rem 1.4rem;font-size:.8rem;opacity:.6;letter-spacing:.1em}
+  footer .suits-sm{font-size:1.2rem;margin-bottom:1rem;letter-spacing:.5rem}
+  a.mail{color:var(--cyan)}
+</style>
+</head>
+<body>
+
+<div class="ticker"><span>♠ SPIELEABEND ♥ BERLIN RAVE EDITION ♦ KEIN KONKURRENZDRUCK, NUR VIBES ♣ SNACKS · DRINKS · KARTEN · CHAOS ♠ 10.07.2026 · 19:00 UHR ♥ BRING DEIN LIEBLINGSSPIEL ♦ &nbsp;</span></div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="kicker">Private Rave · nur mit Zusage</div>
+  <h1>Spiele&shy;abend<span class="sub">Berlin Rave Edition</span></h1>
+  <div class="suits"><span class="s1">♠</span><span class="s2">♥</span><span class="s3">♦</span><span class="s4">♣</span></div>
+  <p class="meta-line">FR · <b>10. JULI 2026</b> · AB 19:00 UHR · BEI MIR ZU HAUSE</p>
+
+  <div class="countdown" id="countdown">
+    <div class="cd-box"><div class="num" id="d">–</div><div class="lbl">Tage</div></div>
+    <div class="cd-box"><div class="num" id="h">–</div><div class="lbl">Std</div></div>
+    <div class="cd-box"><div class="num" id="m">–</div><div class="lbl">Min</div></div>
+    <div class="cd-box"><div class="num" id="s">–</div><div class="lbl">Sek</div></div>
+  </div>
+
+  <a class="cta" href="#anmeldung">Ich bin dabei →</a>
+  <div class="scroll-hint">↓ scroll für den Plan ↓</div>
+</header>
+
+<!-- WAS DICH ERWARTET -->
+<section>
+  <h2 class="sec-title">Was dich <span class="hl">erwartet</span></h2>
+  <div class="grid">
+    <div class="card"><span class="emoji">🃏</span><h3>Kartenspiele bis zum Umfallen</h3><p>Von Uno-Eskalation bis Poker-Face – bunte Auswahl an Brett- & Kartenspielen.</p></div>
+    <div class="card"><span class="emoji">🍕</span><h3>Snacks & Drinks</h3><p>Fingerfood, kühle Getränke und alles, was ein Spieleabend braucht.</p></div>
+    <div class="card"><span class="emoji">🔊</span><h3>Gute Beats</h3><p>Entspannte Rave-Playlist im Hintergrund. Wohnzimmer wird zur Spielarena.</p></div>
+    <div class="card"><span class="emoji">😎</span><h3>Null Konkurrenzdruck</h3><p>Spaß steht im Vordergrund. Verlieren ist hier auch ein Vibe.</p></div>
+  </div>
+</section>
+
+<!-- PROGRAMM / LINEUP -->
+<section>
+  <h2 class="sec-title">Das <span class="hl">Line-Up</span></h2>
+  <ul class="lineup">
+    <li><span class="time">19:00</span><span class="act">🚪 Doors open · Ankommen &amp; Anstoßen</span></li>
+    <li><span class="time">19:30</span><span class="act">🎲 Warm-Up-Runde · leichte Kartenspiele</span></li>
+    <li><span class="time">21:00</span><span class="act">🍕 Snack-Break &amp; Team-Wechsel</span></li>
+    <li><span class="time">21:30</span><span class="act">🃏 Prime Time · die großen Runden</span></li>
+    <li><span class="time">open&nbsp;end</span><span class="act">🌙 So lange die Karten glühen</span></li>
+  </ul>
+</section>
+
+<!-- MITBRINGEN -->
+<section>
+  <h2 class="sec-title">Bring <span class="hl">mit</span></h2>
+  <div class="grid">
+    <div class="card"><span class="emoji">⚡</span><h3>Gute Laune</h3><p>Pflicht! Ohne geht gar nichts.</p></div>
+    <div class="card"><span class="emoji">🎴</span><h3>Dein Lieblingsspiel</h3><p>Optional – wenn du einen Klassiker mitbringen willst.</p></div>
+    <div class="card"><span class="emoji">🥨</span><h3>Snack oder Drink</h3><p>Gerne etwas zum Teilen für die große Tafel.</p></div>
+  </div>
+</section>
+
+<!-- ANMELDUNG -->
+<section id="anmeldung">
+  <h2 class="sec-title">Bist du <span class="hl">dabei?</span></h2>
+  <div class="info-box">
+    <p style="font-size:1.1rem;margin-bottom:1.5rem">Sag mir bitte bis <b>8. Juli</b> Bescheid, damit ich genug einkaufen kann.<br>Ein Klick – dein Mailprogramm öffnet die fertige Zusage:</p>
+    <a class="cta" href="mailto:nicole.doser@medumio.de?subject=Zusage%20Spieleabend%2010.%20Juli%20%F0%9F%8E%B2&body=Hey!%20Ich%20bin%20beim%20Spieleabend%20am%2010.%20Juli%20dabei.%20%F0%9F%83%8F%0A%0AName%3A%20%0AIch%20komme%20mit%20___%20Personen%3A%20%0AIch%20bringe%20mit%20(Spiel%2FSnack%2FDrink)%3A%20%0A%0ABis%20dann!">📨 Zusage senden</a>
+    <p style="margin-top:1.5rem;font-size:.85rem;opacity:.75">Lieber absagen? Auch das per Klick – einfach die Mail anpassen. 💜</p>
+  </div>
+</section>
+
+<footer>
+  <div class="suits-sm"><span style="color:var(--pink)">♠</span> <span style="color:var(--cyan)">♥</span> <span style="color:var(--acid)">♦</span> <span style="color:var(--uv)">♣</span></div>
+  Spieleabend · Berlin Rave Edition · 10.07.2026<br>
+  Fragen? Schreib mir: <a class="mail" href="mailto:nicole.doser@medumio.de">nicole.doser@medumio.de</a>
+</footer>
+
+<script>
+  // Countdown auf 10. Juli 2026, 19:00 Uhr (lokale Zeit)
+  const target = new Date("2026-07-10T19:00:00").getTime();
+  const el = {d:document.getElementById('d'),h:document.getElementById('h'),m:document.getElementById('m'),s:document.getElementById('s')};
+  function tick(){
+    const diff = target - Date.now();
+    if(diff <= 0){ el.d.textContent='🎉';el.h.textContent='LOS';el.m.textContent='GEHT';el.s.textContent='S!';return; }
+    const dd=Math.floor(diff/86400000), hh=Math.floor(diff%86400000/3600000), mm=Math.floor(diff%3600000/60000), ss=Math.floor(diff%60000/1000);
+    el.d.textContent=dd; el.h.textContent=String(hh).padStart(2,'0'); el.m.textContent=String(mm).padStart(2,'0'); el.s.textContent=String(ss).padStart(2,'0');
+  }
+  tick(); setInterval(tick,1000);
+</script>
+</body>
+</html>
